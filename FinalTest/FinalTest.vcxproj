@@ -35,6 +35,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="common.c" />
+    <ClCompile Include="intance.c" />
+    <ClCompile Include="read.c" />
+    <ClCompile Include="write.c" />
     <ResourceCompile Include="FinalTest.rc" />
     <ClCompile Include="FinalTest.c" />
     <Inf Include="FinalTest.inf" />
@@ -151,6 +155,9 @@
     <Link>
       <AdditionalDependencies>fltmgr.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ClCompile>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Link>
@@ -179,6 +186,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <FilesToPackage Include="$(TargetPath)" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CallbackRoutines.h" />
+    <ClInclude Include="common.h" />
+    <ClInclude Include="FinalTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
