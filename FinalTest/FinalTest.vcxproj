@@ -36,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="common.c" />
+    <ClCompile Include="ctx.c" />
     <ClCompile Include="intance.c" />
     <ClCompile Include="read.c" />
     <ClCompile Include="write.c" />
@@ -190,6 +191,7 @@
   <ItemGroup>
     <ClInclude Include="CallbackRoutines.h" />
     <ClInclude Include="common.h" />
+    <ClInclude Include="ctx.h" />
     <ClInclude Include="FinalTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

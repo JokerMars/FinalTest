@@ -39,6 +39,9 @@
     <ClCompile Include="read.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ctx.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="FinalTest.rc">
@@ -53,6 +56,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CallbackRoutines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ctx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

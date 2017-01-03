@@ -4,9 +4,8 @@
 
 [Version]
 Signature   = "$Windows NT$"
-Class       = "ActivityMonitor"                         ;This is determined by the work this filter driver does
-ClassGuid   = {b86dff51-a31e-4bac-b3cf-e8cfe75c9fc2}    ;This value is determined by the Load Order Group value
-
+Class       = "Encryption"                              ;This is determined by the work this filter driver does
+ClassGuid   = {a0a701c0-a511-42ff-aa6c-06dc0395576f}    ;This value is determined by the Class
 Provider    = %ManufacturerName%
 DriverVer   = 12/30/2016,1.0.0.0
 CatalogFile = FinalTest.cat

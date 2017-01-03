@@ -116,14 +116,16 @@ Return Value:
 
 	InitMonitorVariable();
 
-	//int i;
-	//for (i = 0; i < MAXNUM; i++)
-	//{
-	//	if (MonitoredProcess[i] == NULL)continue;
-	//	KdPrint(("    %s\n", MonitoredProcess[i]));
-	//	if (Ext[i].Length == 0)continue;
-	//	KdPrint(("    %wZ\n", Ext[i]));
-	//}
+	ExInitializeNPagedLookasideList(&Pre2PostContextList,
+		NULL,
+		NULL,
+		0,
+		sizeof(PRE_2_POST_CONTEXT),
+		PRE_2_POST_TAG,
+		0);
+
+
+
 
 
     //
@@ -147,6 +149,8 @@ Return Value:
         if (!NT_SUCCESS( status )) {
 
             FltUnregisterFilter( gFilterHandle );
+
+			ExDeleteNPagedLookasideList(&Pre2PostContextList);
         }
     }
 
@@ -184,6 +188,8 @@ Return Value:
                   ("FinalTest!FinalTestUnload: Entered\n") );
 
     FltUnregisterFilter( gFilterHandle );
+
+	ExDeleteNPagedLookasideList(&Pre2PostContextList);
 
     return STATUS_SUCCESS;
 }
