@@ -19,6 +19,7 @@ extern ULONG gTraceFlags;
 #define MAXNUM 10
 extern PCHAR MonitoredProcess[MAXNUM];
 extern UNICODE_STRING Ext[MAXNUM];
+extern UNICODE_STRING MonitoredDirectory;
 
 extern ULONG g_curProcessNameOffset;
 
@@ -31,7 +32,7 @@ BOOLEAN IsMonitoredFileExt(PUNICODE_STRING ext);
 
 BOOLEAN IsMonitored(PCHAR procName, PUNICODE_STRING ext);
 
-
+BOOLEAN IsMonitoredDirectory(PUNICODE_STRING path);
 
 ULONG GetProcessNameOffset();
 

@@ -33,14 +33,7 @@ PreWrite(
 			leave;
 		}
 
-		KdPrint(("\nIRP_MJ_WRITE:\n"));
-		KdPrint(("    Process Name: %s\n", procName));
-		KdPrint(("   *Write Len: %d\n", Data->Iopb->Parameters.Write.Length));
-		KdPrint(("  **Write Offset: %d\n", Data->Iopb->Parameters.Write.ByteOffset.QuadPart));
-		KdPrint((" ***Write Offset + Len: %d\n", Data->Iopb->Parameters.Write.Length +
-			Data->Iopb->Parameters.Write.ByteOffset.QuadPart));
-
-		retVal = FLT_PREOP_SUCCESS_WITH_CALLBACK;
+		
 
 		status = FltGetFileNameInformation(Data,
 			FLT_FILE_NAME_NORMALIZED | FLT_FILE_NAME_QUERY_DEFAULT,
@@ -51,14 +44,32 @@ PreWrite(
 		}
 		FltParseFileNameInformation(pfNameInfo);
 
+		if (!IsMonitoredFileExt(&pfNameInfo->Extension))
+		{
+			leave;
+		}
+
+		if (!IsMonitoredDirectory(&pfNameInfo->Name))
+		{
+			leave;
+		}
+
+#if DBG
+		KdPrint(("\nIRP_MJ_WRITE:\n"));
+		KdPrint(("    Process Name: %s\n", procName));
+		KdPrint(("   *Write Len: %d\n", Data->Iopb->Parameters.Write.Length));
+		KdPrint(("  **Write Offset: %d\n", Data->Iopb->Parameters.Write.ByteOffset.QuadPart));
+		KdPrint((" ***Write Offset + Len: %d\n", Data->Iopb->Parameters.Write.Length +
+			Data->Iopb->Parameters.Write.ByteOffset.QuadPart));
+
 		KdPrint(("    The File Name: %wZ\n", &(pfNameInfo->Name)));
 		KdPrint(("    The File Ext: %wZ\n", &(pfNameInfo->Extension)));
+		KdPrint(("    The Volume: %wZ\n", &(pfNameInfo->Volume)));
 		
 		//KdPrint(("    Buffer Address: %08x\n", Data->Iopb->Parameters.Write.WriteBuffer));
+#endif
 
-
-		
-
+		retVal = FLT_PREOP_SUCCESS_WITH_CALLBACK;
 	}
 	finally
 	{

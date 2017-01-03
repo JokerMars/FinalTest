@@ -32,15 +32,6 @@ PreRead(
 			leave;
 		}
 
-		KdPrint(("\nIRP_MJ_READ:\n"));
-		KdPrint(("    Process Name: %s\n", procName));
-		KdPrint(("   *Read Len: %d\n", Data->Iopb->Parameters.Read.Length));
-		KdPrint(("  **Read Offset: %d\n", Data->Iopb->Parameters.Read.ByteOffset.QuadPart));
-		KdPrint((" ***Read Offset + Len: %d\n", Data->Iopb->Parameters.Read.Length +
-			Data->Iopb->Parameters.Read.ByteOffset.QuadPart));
-
-		retVal = FLT_PREOP_SUCCESS_WITH_CALLBACK;
-
 		status = FltGetFileNameInformation(Data,
 			FLT_FILE_NAME_NORMALIZED | FLT_FILE_NAME_QUERY_DEFAULT,
 			&pfNameInfo);
@@ -49,6 +40,26 @@ PreRead(
 			leave;
 		}
 		FltParseFileNameInformation(pfNameInfo);
+
+		if (!IsMonitoredFileExt(&pfNameInfo->Extension))
+		{
+			leave;
+		}
+
+		if (!IsMonitoredDirectory(&pfNameInfo->Name))
+		{
+			leave;
+		}
+
+
+
+#if DBG
+		KdPrint(("\nIRP_MJ_READ:\n"));
+		KdPrint(("    Process Name: %s\n", procName));
+		KdPrint(("   *Read Len: %d\n", Data->Iopb->Parameters.Read.Length));
+		KdPrint(("  **Read Offset: %d\n", Data->Iopb->Parameters.Read.ByteOffset.QuadPart));
+		KdPrint((" ***Read Offset + Len: %d\n", Data->Iopb->Parameters.Read.Length +
+			Data->Iopb->Parameters.Read.ByteOffset.QuadPart));
 
 		KdPrint(("    The File Name: %wZ\n", &(pfNameInfo->Name)));
 		KdPrint(("    The File Ext: %wZ\n", &(pfNameInfo->Extension)));
@@ -59,8 +70,9 @@ PreRead(
 		{
 			KdPrint(("This Read: FastIO\n"));
 		}
+#endif
 
-
+		retVal = FLT_PREOP_SUCCESS_WITH_CALLBACK;
 	}
 	finally
 	{
