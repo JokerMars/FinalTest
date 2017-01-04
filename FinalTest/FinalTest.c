@@ -112,7 +112,9 @@ Return Value:
 	//
 
 	g_curProcessNameOffset = GetProcessNameOffset();
+#if DBG
 	KdPrint(("FinalTest Entry:\n    Process Offset: %d\n", g_curProcessNameOffset));
+#endif
 
 	InitMonitorVariable();
 

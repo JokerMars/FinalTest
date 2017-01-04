@@ -90,10 +90,14 @@ PreWrite(
 			leave;
 		}
 
-	/*	if (FlagOn(IRP_NOCACHE, iopb->IrpFlags)) 
+		//
+		// if not added, the program will be crash during the running
+		//
+
+		if (FlagOn(IRP_NOCACHE, iopb->IrpFlags)) 
 		{
 			writeLen = (ULONG)ROUND_TO_SIZE(writeLen, 0x200);
-		}*/
+		}
 
 		newBuf = FltAllocatePoolAlignedWithTag(FltObjects->Instance,
 			NonPagedPool,
@@ -177,19 +181,23 @@ PreWrite(
 
 		try {
 
+			RtlCopyMemory(newBuf,
+				origBuf,
+				writeLen);
+
 			//
-			// before copy, we need encrypt the data
+			// encrypt the data*******************************
 			//
 
-			PCHAR buffer = origBuf;
+			PCHAR buffer = newBuf;
 			for (int i = 0; i < writeLen; i++)
 			{
 				buffer[i] = buffer[i] ^ 0x77;
 			}
 
-			RtlCopyMemory(newBuf,
-				origBuf,
-				writeLen);
+			//
+			//*********************************
+			//
 
 		} except(EXCEPTION_EXECUTE_HANDLER) {
 
@@ -296,6 +304,4 @@ PostWrite(
 
 	return FLT_POSTOP_FINISHED_PROCESSING;
 
-
-	return FLT_POSTOP_FINISHED_PROCESSING;
 }

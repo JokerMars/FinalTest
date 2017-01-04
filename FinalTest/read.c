@@ -92,10 +92,10 @@ PreRead(
 			leave;
 		}
 
-		//if (FlagOn(IRP_NOCACHE, iopb->IrpFlags))
-		//{
-		//	readLen = (ULONG)ROUND_TO_SIZE(readLen, 512);
-		//}
+		if (FlagOn(IRP_NOCACHE, iopb->IrpFlags))
+		{
+			readLen = (ULONG)ROUND_TO_SIZE(readLen, 512);
+		}
 
 		newBuf = FltAllocatePoolAlignedWithTag(FltObjects->Instance,
 			NonPagedPool,
