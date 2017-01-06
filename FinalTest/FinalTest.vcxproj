@@ -35,6 +35,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="cache.c" />
     <ClCompile Include="common.c" />
     <ClCompile Include="ctx.c" />
     <ClCompile Include="intance.c" />
@@ -192,6 +193,7 @@
     <FilesToPackage Include="$(TargetPath)" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cache.h" />
     <ClInclude Include="CallbackRoutines.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="ctx.h" />

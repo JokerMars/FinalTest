@@ -55,11 +55,11 @@ PreWrite(
 		}
 		FltParseFileNameInformation(pfNameInfo);
 
-		if (!IsMonitoredFileExt(&pfNameInfo->Extension))
+	/*	if (!IsMonitoredFileExt(&pfNameInfo->Extension))
 		{
 			leave;
 		}
-
+*/
 		if (!IsMonitoredDirectory(&pfNameInfo->Name))
 		{
 			leave;

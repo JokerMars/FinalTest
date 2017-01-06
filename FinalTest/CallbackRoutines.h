@@ -6,6 +6,7 @@
 
 #include "common.h"
 #include "ctx.h"
+#include "cache.h"
 
 /*************************************************************************
 MiniFilter callback routines.

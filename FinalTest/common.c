@@ -17,6 +17,10 @@ VOID InitMonitorVariable()
 {
 	//MonitoredProcess[0] = "notepad.exe";
 	MonitoredProcess[0] = "acad.exe";
+	MonitoredProcess[1] = "WINWORD.EXE";
+	MonitoredProcess[2] = "ugraf.exe";
+	MonitoredProcess[3] = "explorer.exe";
+	MonitoredProcess[4] = "System";
 	/*MonitoredProcess[1] = "Connect.Service.ContentService.exe";
 	MonitoredProcess[2] = "AdAppMgr.exe";
 	MonitoredProcess[3] = "AdAppMgrSvc.exe";
